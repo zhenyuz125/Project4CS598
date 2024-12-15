@@ -9,7 +9,7 @@ import random
 from recommendation import sMatrix, myIBCF
 
 # load the data, from prof
-ratings = pd.read_csv('ratings.dat', sep='::', engine='python', header=None)
+ratings = pd.read_csv('filtered_ratings.dat', sep='::', engine='python', header=None)
 ratings.columns = ['UserID', 'MovieID', 'Rating', 'Timestamp']
 movies = pd.read_csv('movies.dat', sep='::', engine='python', encoding="ISO-8859-1", header=None)
 movies.columns = ['MovieID', 'Title', 'Genres']
@@ -24,6 +24,8 @@ ratings_copy['UserID'] = 'u' + ratings_copy['UserID'].astype(str)
 RMat = ratings_copy.pivot(index='UserID', columns='MovieID', values='Rating')
 # Replace NaN with "NA" for missing ratings
 RMat = RMat.fillna("NA")
+
+
 
 movieList = [
     {
